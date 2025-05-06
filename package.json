@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "scrape": "node index.js",
-    "chart": "node generateChart.js"
+    "chart": "node generateChart.js",
     "placeholder": "node generatePlaceholder.js"
   },
   "dependencies": {
