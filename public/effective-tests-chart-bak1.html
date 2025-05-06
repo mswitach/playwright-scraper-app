@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Effective Tests Chart</title>
+</head>
+<body>
+  <h1>Este es un placeholder dale?</h1>
+  <p id="hora-actual"></p>
+
+  <script>
+    // Obtener la hora actual ajustada a GMT-3
+    const ahora = new Date();
+    ahora.setHours(ahora.getHours() - 3); // Ajuste manual a GMT-3
+
+    // Formatear la hora
+    const horaFormateada = ahora.toLocaleTimeString('es-AR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    // Mostrar en el HTML
+    document.getElementById("hora-actual").innerText = `Hora actual: ${horaFormateada}`;
+  </script>
+</body>
+</html>
+

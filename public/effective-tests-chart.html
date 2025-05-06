@@ -7,21 +7,34 @@
 <body>
   <h1>Este es un placeholder dale?</h1>
   <p id="hora-actual"></p>
+  <p id="hora-servidor"></p>
+  <p style="color: green;">✅ Esta página fue actualizada por el cron</p>
 
   <script>
-    // Obtener la hora actual ajustada a GMT-3
+    // Hora local ajustada a GMT-3
     const ahora = new Date();
-    ahora.setHours(ahora.getHours() - 3); // Ajuste manual a GMT-3
-
-    // Formatear la hora
+    ahora.setHours(ahora.getHours() - 3);
     const horaFormateada = ahora.toLocaleTimeString('es-AR', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit'
     });
+    document.getElementById("hora-actual").innerText = `Hora local del navegador (GMT-3): ${horaFormateada}`;
 
-    // Mostrar en el HTML
-    document.getElementById("hora-actual").innerText = `Hora actual: ${horaFormateada}`;
+    // Hora oficial desde servidor externo
+    fetch('https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires')
+      .then(res => res.json())
+      .then(data => {
+        const horaServidor = new Date(data.datetime).toLocaleTimeString('es-AR', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        document.getElementById("hora-servidor").innerText = `Hora desde worldtimeapi.org: ${horaServidor}`;
+      })
+      .catch(() => {
+        document.getElementById("hora-servidor").innerText = '❌ No se pudo obtener la hora del servidor.';
+      });
   </script>
 </body>
 </html>
